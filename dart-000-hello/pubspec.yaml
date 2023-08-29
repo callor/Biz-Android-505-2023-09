@@ -1,0 +1,9 @@
+# project 패키지 이름
+name: hello
+
+# 프로젝트가 실행되는 sdk 버전
+enviroment:
+  sdk: ">=2.18.4 < 3.0.0"
+
+dev_dependencies:
+  lints: ^2.0.0
