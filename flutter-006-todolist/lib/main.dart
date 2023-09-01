@@ -26,6 +26,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPage extends State<StartPage> {
   var todoList = [];
+  var _delConfirm = false;
 
   // var todoList = [
   //   Todo(
@@ -115,15 +116,62 @@ class _StartPage extends State<StartPage> {
         itemCount: todoList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                _delConfirm = true;
+              });
+            },
             splashColor:
                 const Color.fromARGB(255, 180, 20, 30).withOpacity(0.5),
             title: Dismissible(
               key: Key(todoList[index].content),
-              background: const Text(
-                "삭제??",
-                style: TextStyle(color: Colors.red),
+              background: Container(
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                color: Colors.green,
+                alignment: Alignment.centerLeft,
+                child: const Icon(
+                  Icons.save,
+                  size: 36,
+                  color: Colors.white,
+                ),
               ),
+              secondaryBackground: Container(
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                color: Colors.red,
+                alignment: Alignment.centerRight,
+                child: const Icon(
+                  Icons.delete,
+                  size: 36,
+                  color: Colors.white,
+                ),
+              ),
+              // 사라지기 전의 event
+              confirmDismiss: (direction) {
+                return showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("정말삭제할까요?"),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: const Text("예"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: const Text("아니오"),
+                      ),
+                    ],
+                  ),
+                );
+                // return Future.value(_delConfirm);
+              },
+              // 사라진 후 event
               onDismissed: (direction) {
                 setState(() {
                   todoList.removeAt(index);
