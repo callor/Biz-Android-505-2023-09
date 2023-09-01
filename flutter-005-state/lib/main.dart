@@ -104,6 +104,21 @@ class StartPage extends State<HomePage> {
     });
   }
 
+  /// state 가 최초에 mount 될때
+  @override
+  void initState() {
+    filterList = studentList;
+    super.initState();
+  }
+
+  // state 가 unmount 될때
+  // 일부 context 에 저장된 변수들을 사용 해제 해야할 경우가 있는데
+  // 이때 여기에 그러한 코드를 작성한다
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,7 +147,7 @@ class StartPage extends State<HomePage> {
         child: Column(
           children: [
             TextField(
-              onChanged: (value) => _onChangeHandler(value),
+              onChanged: _onChangeHandler, //(value) => _onChangeHandler(value),
               decoration: const InputDecoration(
                   labelText: "Search",
                   labelStyle: TextStyle(fontSize: 20),
@@ -142,15 +157,19 @@ class StartPage extends State<HomePage> {
                     Icons.search,
                   )),
             ),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: "name",
-              ),
-            ),
 
+            const SizedBox(
+              height: 20,
+            ),
             // ListView 를 사용하여 list 보이기
             // Expanded 실행하여 Column box 에 가득차게 구현
-            Expanded(child: appBarBody()),
+            Expanded(
+                child: filterList.isNotEmpty
+                    ? appBarBody()
+                    : const Text(
+                        "찾는 값이 없음",
+                        style: TextStyle(fontSize: 25),
+                      )),
           ],
         ),
       ),

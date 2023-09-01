@@ -26,7 +26,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPage extends State<StartPage> {
   var todoList = [];
-  var _delConfirm = false;
+  final _delConfirm = false;
 
   // var todoList = [
   //   Todo(
@@ -116,11 +116,7 @@ class _StartPage extends State<StartPage> {
         itemCount: todoList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: () {
-              setState(() {
-                _delConfirm = true;
-              });
-            },
+            onTap: () {},
             splashColor:
                 const Color.fromARGB(255, 180, 20, 30).withOpacity(0.5),
             title: Dismissible(
