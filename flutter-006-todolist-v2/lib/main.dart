@@ -101,14 +101,24 @@ class _StartPage extends State<StartPage> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  var todo = getTodo(todoContent);
+                  setState(() {
+                    todoList.add(todo);
+                    todoContent = "";
+                    inputController.clear();
+                  });
+                },
                 icon: const Icon(Icons.send_outlined),
               )
             ],
           ),
         ),
       ),
-      body: todoListView(),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: todoListView(),
+      ),
     );
   }
 
@@ -120,10 +130,16 @@ class _StartPage extends State<StartPage> {
       itemCount: todoList.length,
       itemBuilder: (context, index) {
         return ListTile(
-          onTap: () {},
+          // onTap: () {},
           splashColor: const Color.fromARGB(255, 180, 20, 30).withOpacity(0.5),
           title: Dismissible(
-            key: Key(todoList[index].content),
+            /// Key(todoList[index].content),
+            /// 만약 todoList 데이터가 없는 경우
+            /// null exception 이 발생할수 있기 때문에
+            /// key 의 값이 null 이 된다. flutter 에서 제공하는 UUID 인
+            /// UniqueKey() 사용한다
+            key: UniqueKey(),
+            // 왼쪽에서 오른쪽으로 Swipe 를 했을때 나타나는 Widget
             background: Container(
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -146,36 +162,11 @@ class _StartPage extends State<StartPage> {
                 color: Colors.white,
               ),
             ),
-            // 사라지기 전의 event
-            confirmDismiss: (direction) {
-              return showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text("정말삭제할까요?"),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      child: const Text("예"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      },
-                      child: const Text("아니오"),
-                    ),
-                  ],
-                ),
-              );
-              // return Future.value(_delConfirm);
-            },
-            // 사라진 후 event
-            onDismissed: (direction) {
-              setState(() {
-                todoList.removeAt(index);
-              });
-            },
+
+            /// 사라지기 전의 event
+            /// event 핸들러에서 Future.value(true) 를 return 하면
+            /// swipe 행위가 진행되고, false 를 return 하면 진행을 멈춘다
+            confirmDismiss: (direction) => onConfirmHandler(direction),
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
@@ -203,6 +194,64 @@ class _StartPage extends State<StartPage> {
           ),
         );
       },
+    );
+  }
+
+  Future<bool?> onConfirmHandler(direction) {
+    if (direction == DismissDirection.startToEnd) {
+      return completeConfirm();
+    } else if (direction == DismissDirection.endToStart) {
+      return deleteConfirm();
+    }
+    // Future : 화면에 state 에 의해서 변화를 감지하는 객체
+    return Future.value(false);
+  }
+
+  Future<bool?> deleteConfirm() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("삭제할까요??"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text("예"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text("아니오"),
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<bool?> completeConfirm() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("완료처리를 할까요??"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              /// Navigator..pop(true) :
+              ///     showDialog 가 return 하는 값
+              Navigator.of(context).pop(true);
+            },
+            child: const Text("예"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text("아니오"),
+          )
+        ],
+      ),
     );
   }
 
