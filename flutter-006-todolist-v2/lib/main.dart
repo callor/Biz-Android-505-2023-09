@@ -166,7 +166,24 @@ class _StartPage extends State<StartPage> {
             /// 사라지기 전의 event
             /// event 핸들러에서 Future.value(true) 를 return 하면
             /// swipe 행위가 진행되고, false 를 return 하면 진행을 멈춘다
-            confirmDismiss: (direction) => onConfirmHandler(direction),
+            confirmDismiss: (direction) => onConfirmHandler(direction, index),
+
+            /// confirmDismiss 에서 true 가 return 되었을때 할일
+            onDismissed: (direction) {
+              if (direction == DismissDirection.startToEnd) {
+                setState(() {
+                  todoList[index].complete = !todoList[index].complete;
+                });
+              } else if (direction == DismissDirection.endToStart) {
+                setState(() {
+                  todoList.removeAt(index);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("${todoList[index].content} 를 삭제하였습니다"),
+                ));
+              }
+            },
+
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
@@ -179,12 +196,23 @@ class _StartPage extends State<StartPage> {
                     ],
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        todoList[index].content,
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.blue),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            todoList[index].content,
+                            style: todoList[index].complete
+                                ? const TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: 20,
+                                    color: Color(0xFF8E969C))
+                                : const TextStyle(
+                                    fontSize: 20, color: Colors.blue),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -197,9 +225,9 @@ class _StartPage extends State<StartPage> {
     );
   }
 
-  Future<bool?> onConfirmHandler(direction) {
+  Future<bool?> onConfirmHandler(direction, index) {
     if (direction == DismissDirection.startToEnd) {
-      return completeConfirm();
+      return completeConfirm(index);
     } else if (direction == DismissDirection.endToStart) {
       return deleteConfirm();
     }
@@ -230,11 +258,12 @@ class _StartPage extends State<StartPage> {
     );
   }
 
-  Future<bool?> completeConfirm() {
+  Future<bool?> completeConfirm(index) {
+    var yesNo = todoList[index].complete ? "완료처리를 취소할까요??" : "완료처리를 할까요?";
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("완료처리를 할까요??"),
+        title: Text(yesNo),
         actions: [
           ElevatedButton(
             onPressed: () {
