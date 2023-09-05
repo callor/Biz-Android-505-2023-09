@@ -3,6 +3,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todolist/models/todo.dart';
 
+// ignore: constant_identifier_names
+const String TBL_TODO = "tbl_todoList";
+
 /// 안드로이드, iPhone 에는 공통으로 SQLite 라는 RDBMS 가 내장되어 있다
 /// 규모는 매우 작지만 phone 에서 DB 를 SQL 을 사용하여 관리할수 있도록
 /// 여러가지 명령어를 제공한다
@@ -14,9 +17,8 @@ class TodoService {
   /// 이 값은 null 이 아니다 라는 선언
   /// 즉, 곧 이 변수는 누군가가 초기화(값 부여)를 할 것이다
   late Database _database;
-  final String TBL_TODO = "tbl_todoList";
   final String createTABLE = """
-    CREATE TABLE tbl_todoList (
+    CREATE TABLE $TBL_TODO  (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         sdate TEXT, 
         stime TEXT,
@@ -72,6 +74,12 @@ class TodoService {
     return result;
   }
 
+  /// where : "id = ${id}" , id = "1 = 1 OR "
+  /// SQL 을 사용할때 문자열 연결방식으로 WHERE 절을 사용하면 절대 안된다
+  /// SQL Injection 공격에 바로 노출될수 있다
+  /// 만약 이처럼 코드를 작성했을 때 where : "id = ${id}" ,
+  /// id 변수에 "1 = 1 OR " 와 같은 코드를 전달하면 Table 의 모든 데이터가
+  /// 한꺼번에 삭제되는 결과가 발생한다
   Future<int> delete(int id) async {
     final db = await database;
     return await db.delete(
