@@ -1,0 +1,220 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "dart-000-hello",
+            "cwd": "dart-000-hello",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "dart-001-hello",
+            "cwd": "dart-001-hello",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-000-hello",
+            "cwd": "flutter-000-hello",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-000-hello (profile mode)",
+            "cwd": "flutter-000-hello",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-000-hello (release mode)",
+            "cwd": "flutter-000-hello",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-001-hello",
+            "cwd": "flutter-001-hello",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-001-hello (profile mode)",
+            "cwd": "flutter-001-hello",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-001-hello (release mode)",
+            "cwd": "flutter-001-hello",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-002-page",
+            "cwd": "flutter-002-page",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-002-page (profile mode)",
+            "cwd": "flutter-002-page",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-002-page (release mode)",
+            "cwd": "flutter-002-page",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-003-drawer",
+            "cwd": "flutter-003-drawer",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-003-drawer (profile mode)",
+            "cwd": "flutter-003-drawer",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-003-drawer (release mode)",
+            "cwd": "flutter-003-drawer",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-004-state",
+            "cwd": "flutter-004-state",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-004-state (profile mode)",
+            "cwd": "flutter-004-state",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-004-state (release mode)",
+            "cwd": "flutter-004-state",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-005-state",
+            "cwd": "flutter-005-state",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-005-state (profile mode)",
+            "cwd": "flutter-005-state",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-005-state (release mode)",
+            "cwd": "flutter-005-state",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-006-todolist",
+            "cwd": "flutter-006-todolist",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-006-todolist (profile mode)",
+            "cwd": "flutter-006-todolist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-006-todolist (release mode)",
+            "cwd": "flutter-006-todolist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-006-todolist-v2",
+            "cwd": "flutter-006-todolist-v2",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-006-todolist-v2 (profile mode)",
+            "cwd": "flutter-006-todolist-v2",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-006-todolist-v2 (release mode)",
+            "cwd": "flutter-006-todolist-v2",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-006-todolist-v3",
+            "cwd": "flutter-006-todolist-v3",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-006-todolist-v3 (profile mode)",
+            "cwd": "flutter-006-todolist-v3",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-006-todolist-v3 (release mode)",
+            "cwd": "flutter-006-todolist-v3",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter-007-navigator",
+            "cwd": "flutter-007-navigator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter-007-navigator (profile mode)",
+            "cwd": "flutter-007-navigator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter-007-navigator (release mode)",
+            "cwd": "flutter-007-navigator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
