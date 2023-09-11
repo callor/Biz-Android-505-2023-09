@@ -58,7 +58,12 @@ class _StartPageState extends State<StartPage> {
               children: [
                 Text("로그인한 사용자 email : ${_authUser?.email}"),
                 ElevatedButton(
-                  onPressed: () => FirebaseAuth.instance.signOut(),
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    setState(() {
+                      updateAuthUser(null);
+                    });
+                  },
                   child: const Text("로그아웃"),
                 )
               ],
