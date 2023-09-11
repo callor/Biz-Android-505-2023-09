@@ -31,5 +31,8 @@ google-services.json
 firebase_options.*
 node_modules/
 
+# naver service
+naver_open_api.*
+
 # Android Profiling
 *.hprof

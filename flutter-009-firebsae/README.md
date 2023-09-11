@@ -27,3 +27,5 @@ flutter pub get
 keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
 # 비밀번호 : android
 ```
+
+- 구글로그인 도구 설치 : `flutter pub add google_sign_in`

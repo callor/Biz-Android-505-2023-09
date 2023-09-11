@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -92,7 +93,44 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.all(20),
                         backgroundColor: Colors.red,
                       ),
-                      onPressed: () => false,
+                      onPressed: () async {
+                        try {
+                          final GoogleSignInAccount? googleUser =
+                              await GoogleSignIn().signIn();
+                          debugPrint("SignIn");
+                          final GoogleSignInAuthentication? googleAuth =
+                              await googleUser?.authentication;
+                          debugPrint("SignIn Auth");
+                          if (googleUser == null || googleAuth == null) {
+                            if (!mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("구글 Login 실패"),
+                              ),
+                            );
+                          } else {
+                            final credential = GoogleAuthProvider.credential(
+                              accessToken: googleAuth.accessToken,
+                              idToken: googleAuth.idToken,
+                            );
+                            // google 에게 로그인 요청
+
+                            // google 이 보내준 인증정보를 사용하여
+                            // firebase 에 로그인하기
+                            // oAuth2 방식의 login
+                            final userCredential = await FirebaseAuth.instance
+                                .signInWithCredential(credential);
+                            await widget.updateAuthUser(userCredential.user);
+                            if (!mounted) return;
+                            Navigator.of(context).pop();
+                          }
+                        } catch (e) {
+                          // if (!mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(e.toString())));
+                        }
+                        debugPrint("SignIn Token");
+                      },
                       child: const SizedBox(
                         width: double.infinity,
                         child: Text(
