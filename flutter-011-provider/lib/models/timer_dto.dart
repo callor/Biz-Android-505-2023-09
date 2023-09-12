@@ -5,5 +5,5 @@
 class TimerDto {
   int timer;
   bool timerRun;
-  TimerDto({this.timer = 500, this.timerRun = false});
+  TimerDto({this.timer = 300, this.timerRun = false});
 }
