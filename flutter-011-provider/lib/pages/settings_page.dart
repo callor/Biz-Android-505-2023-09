@@ -25,7 +25,10 @@ class SettingsPage extends StatelessWidget {
         backgroundColor: Colors.green,
         leading: IconButton(
             color: Colors.white,
-            onPressed: () => pageViewModel.bottomNavTap(0),
+            onPressed: () {
+              pageViewModel.bottomNavTap(0);
+              FocusScope.of(context).unfocus();
+            },
             icon: const Icon(
               Icons.arrow_back,
             )),
@@ -38,6 +41,9 @@ class SettingsPage extends StatelessWidget {
               SettingsTile(
                 leading: const Icon(Icons.timer_outlined),
                 title: TextField(
+                  onChanged: (value) {
+                    context.read<TimerViewModel>().setTimer(int.parse(value));
+                  },
                   controller: textEditController,
                   decoration: const InputDecoration(labelText: "타이머 시작값"),
                 ),
@@ -54,6 +60,17 @@ class SettingsPage extends StatelessWidget {
             title: const Text("테마 설정"),
             tiles: [
               SettingsTile(title: const Text("타이머")),
+              SettingsTile(title: const Text("타이머")),
+            ],
+          ),
+          SettingsSection(
+            title: const Text("공통 설정"),
+            tiles: [
+              SettingsTile.switchTile(
+                title: const Text("타이머 즉시 실행"),
+                initialValue: false,
+                onToggle: (value) => false,
+              ),
               SettingsTile(title: const Text("타이머")),
             ],
           ),
