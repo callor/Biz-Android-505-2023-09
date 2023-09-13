@@ -24,8 +24,8 @@ class App extends StatelessWidget {
     var pageViewModel = context.watch<PageViewModel>();
 
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true),
       home: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -40,8 +40,8 @@ class App extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               onPageChanged: ((newIndex) =>
                   pageViewModel.pageViewChange(newIndex)),
-              children: const [
-                HomePage(),
+              children: [
+                const HomePage(),
                 SettingsPage(),
               ]),
           bottomNavigationBar: BottomNavigationBar(

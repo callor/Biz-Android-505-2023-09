@@ -1,42 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mview/ui_models/page_view_model.dart';
 import 'package:mview/ui_models/timer_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:settings_ui/settings_ui.dart';
+
+import '../ui_models/page_view_model.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  SettingsPage({super.key});
+
+  final textEditController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var textController = TextEditingController();
-    var setTimer = context
-        .select<TimerViewModel, Function(int)>((value) => value.setTimer);
     var pageViewModel = context.watch<PageViewModel>();
+    var timer = context.watch<TimerViewModel>().timerDto.timer;
+    textEditController.text = timer.toString();
 
     return Scaffold(
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: textController,
-            decoration: const InputDecoration(
-              hintText: "타이머 입력",
-            ),
+      appBar: AppBar(
+        title: const Text(
+          "설정",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+        leading: IconButton(
+            color: Colors.white,
+            onPressed: () => pageViewModel.bottomNavTap(0),
+            icon: const Icon(
+              Icons.arrow_back,
+            )),
+      ),
+      body: SettingsList(
+        sections: [
+          SettingsSection(
+            title: const Text("타이머 설정"),
+            tiles: [
+              SettingsTile(
+                leading: const Icon(Icons.timer_outlined),
+                title: TextField(
+                  controller: textEditController,
+                  decoration: const InputDecoration(labelText: "타이머 시작값"),
+                ),
+              ),
+              SettingsTile(
+                title: const TextField(
+                  decoration: InputDecoration(labelText: "타이머 휴식값"),
+                ),
+                leading: const Icon(Icons.timer_off_outlined),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              setTimer(int.parse(textController.text));
-              // 0 번 page 로 되돌아 가기
-              pageViewModel.bottomNavTap(0);
-              // 키보드 감추기
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            child: const Text("저장"),
+          SettingsSection(
+            title: const Text("테마 설정"),
+            tiles: [
+              SettingsTile(title: const Text("타이머")),
+              SettingsTile(title: const Text("타이머")),
+            ],
           ),
         ],
-      )),
+      ),
     );
   }
 }

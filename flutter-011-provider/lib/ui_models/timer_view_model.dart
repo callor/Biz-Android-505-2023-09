@@ -15,10 +15,21 @@ import '../models/timer_dto.dart';
 class TimerViewModel extends ChangeNotifier {
   // viewModel 의 state 변수
   var timerDto = TimerDto();
+  int initTimer = 25 * 60;
 
   // 변수이름(식별자)에 _ 가 부착되면 이변수는 private 성질을 띈다
   // async 패키지에 포함된 객체
   late Timer _timer;
+
+  Future<int> getTimer() async {
+    timerDto.timer = initTimer;
+    notifyListeners();
+    return timerDto.timer;
+  }
+
+  TimerViewModel() {
+    getTimer();
+  }
 
   void setTimer(timer) {
     timerDto.timer = timer;
