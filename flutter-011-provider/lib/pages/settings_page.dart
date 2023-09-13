@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mview/ui_models/theme_controller.dart';
 import 'package:mview/ui_models/timer_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -6,8 +7,8 @@ import 'package:settings_ui/settings_ui.dart';
 import '../ui_models/page_view_model.dart';
 
 class SettingsPage extends StatelessWidget {
-  SettingsPage({super.key});
-
+  SettingsPage({super.key, required this.themeController});
+  final ThemeController themeController;
   final textEditController = TextEditingController();
 
   @override
@@ -59,8 +60,32 @@ class SettingsPage extends StatelessWidget {
           SettingsSection(
             title: const Text("테마 설정"),
             tiles: [
-              SettingsTile(title: const Text("타이머")),
-              SettingsTile(title: const Text("타이머")),
+              SettingsTile(
+                  title: Row(
+                children: [
+                  const Text("테마모드"),
+                  const SizedBox(width: 20),
+                  DropdownButton<ThemeMode>(
+                    value: themeController.themeMode,
+                    onChanged: (value) =>
+                        themeController.updateThemeMode(value),
+                    items: const [
+                      DropdownMenuItem(
+                        value: ThemeMode.system,
+                        child: Text("시스템 테마"),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.dark,
+                        child: Text("어두운 테마"),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
+                        child: Text("밝은 테마"),
+                      ),
+                    ],
+                  )
+                ],
+              )),
             ],
           ),
           SettingsSection(
