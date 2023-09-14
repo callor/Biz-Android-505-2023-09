@@ -7,7 +7,8 @@
   ![Dart 확장설치](image-7.png)
 
 - 자동완성 세팅 : `설정`에 접속하여 실행
-- ![codeAction](image-1.png)
+  ![codeAction](image-1.png)
+
 - codeAction On Save 에서 : `settings.json 편집` 클릭  
   ![Alt text](image-4.png)
 - 다음 항목 추가  
