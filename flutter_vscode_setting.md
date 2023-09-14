@@ -2,6 +2,7 @@
 
 - extention 설치  
   ![확장설치](image.png)
+  ![Dart 확장설치](image-7.png)
 
 - 자동완성 세팅 : `설정`에 접속하여 실행
 - ![codeAction](image-1.png)
