@@ -1,7 +1,9 @@
 # vsCode flutter 개발 환경
 
-- extention 설치  
+- Flutter extention 설치  
   ![확장설치](image.png)
+
+- Dart Data class Generator  
   ![Dart 확장설치](image-7.png)
 
 - 자동완성 세팅 : `설정`에 접속하여 실행
