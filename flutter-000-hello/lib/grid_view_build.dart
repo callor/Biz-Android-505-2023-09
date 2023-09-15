@@ -23,10 +23,30 @@ class MainPage extends StatefulWidget {
   });
 
   final List<Map<String, dynamic>> frogList = [
-    {"name": "참개구리", "color": Colors.blue, "image": "참구리이미지"},
-    {"name": "금개구리", "color": Colors.blue, "image": "금구리이미지"},
-    {"name": "청개구리", "color": Colors.blue, "image": "청구리이미지"},
-    {"name": "맹꽁이", "color": Colors.blue, "image": "맹꽁이이미지"}
+    {
+      "name": "참개구리",
+      "color": Colors.blue,
+      "blankImage": "BLANK",
+      "image": "참구리이미지"
+    },
+    {
+      "name": "금개구리",
+      "color": Colors.blue,
+      "blankImage": "BLANK",
+      "image": "금구리이미지"
+    },
+    {
+      "name": "청개구리",
+      "color": Colors.blue,
+      "blankImage": "BLANK",
+      "image": "청구리이미지"
+    },
+    {
+      "name": "맹꽁이",
+      "color": Colors.blue,
+      "blankImage": "BLANK",
+      "image": "맹꽁이이미지",
+    }
   ];
 
   @override
@@ -44,6 +64,13 @@ class _MainPageState extends State<MainPage> {
     frogName = widget.frogList[index]["name"];
     debugPrint("Frog Name : $frogName");
     frogColor = Colors.blue;
+
+    widget.frogList.map((frog) {
+      frog["color"] = Colors.blue;
+      frog["blankImage"] = frog["name"];
+      return frog;
+    });
+
     super.initState();
   }
 
@@ -68,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                   if (frogName == widget.frogList[index]["name"]) {
                     setState(() {
                       widget.frogList[index]["color"] = Colors.green;
-                      widget.frogList[index]["name"] =
+                      widget.frogList[index]["blankImage"] =
                           widget.frogList[index]["image"];
                     });
                   } else {
@@ -83,7 +110,12 @@ class _MainPageState extends State<MainPage> {
                   color: widget.frogList[index]["color"],
                   width: 100,
                   height: 100,
-                  child: Text(widget.frogList[index]["name"]),
+                  child: Column(
+                    children: [
+                      Text(widget.frogList[index]["name"]),
+                      Text(widget.frogList[index]["blankImage"]),
+                    ],
+                  ),
                 ),
               ),
             ),
