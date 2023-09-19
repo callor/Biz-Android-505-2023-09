@@ -1,4 +1,5 @@
 import 'package:api/api/bus_station.dart';
+import 'package:api/modules/list.dart';
 import 'package:api/provider/bus_station_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,7 +24,16 @@ class MainApp extends StatelessWidget {
             create: (context) => BusStationProvider(),
           )
         ],
+        child: const StartPage(),
       ),
     );
+  }
+}
+
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const BusStationListView();
   }
 }
