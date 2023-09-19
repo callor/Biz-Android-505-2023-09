@@ -34,5 +34,8 @@ node_modules/
 # naver service
 naver_open_api.*
 
+# 공공데이터 service
+*.env
+
 # Android Profiling
 *.hprof
