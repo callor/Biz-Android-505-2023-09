@@ -19,21 +19,22 @@ class BusStation {
   Future<List<StationDto>?> loadStation() async {
     final gwBisStop = dotenv.get(GW_BIS_STOP);
     final queryString = "$gwBisStop?ServiceKey=$serviceKey";
-    // try {
-    var response = await http.get(Uri.parse(queryString));
-    if (response.statusCode == 200) {
-      debugPrint(response.body);
-      Iterable resultStation = await json.decode(response.body)["STATION_LIST"];
+    try {
+      var response = await http.get(Uri.parse(queryString));
+      if (response.statusCode == 200) {
+        debugPrint(response.body);
+        Iterable resultStation =
+            await json.decode(response.body)["STATION_LIST"];
 
-      var resultList = resultStation.map((item) => StationDto.fromMap(item));
-      return resultList.toList();
-    } else {
-      return null;
+        var resultList = resultStation.map((item) => StationDto.fromMap(item));
+        return resultList.toList();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      debugPrint("요청오류 ${e.toString()}");
+      throw Exception("API 연결 오류 발생 ");
     }
-    // } catch (e) {
-    //   debugPrint("요청오류 ${e.toString()}");
-    //   throw Exception("API 연결 오류 발생 ");
-    // }
   }
 
   void loadStationXML() async {
