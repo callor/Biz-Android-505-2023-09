@@ -1,10 +1,10 @@
 name: api
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.1.1 <4.0.0'
+  sdk: ">=3.1.1 <4.0.0"
 
 dependencies:
   flutter:
@@ -21,3 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # assets 을 등록할때는 flutter: 보다 한 leven 아래(Tab Key 누르기)
+  assets:
+    - assets/.env
