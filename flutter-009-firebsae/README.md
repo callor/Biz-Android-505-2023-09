@@ -29,3 +29,12 @@ keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.k
 ```
 
 - 구글로그인 도구 설치 : `flutter pub add google_sign_in`
+
+## 실 스마트폰 디버깅 설정하기
+
+- `Android Studio` 에 key 만들기 : build > Generate Bundle 메뉴에서 생성
+- `C:\Users\callor\Documents\callor.jks`
+- `jdk` 설치 폴더로 이동 : `C:\Users\callor\Downloads\devTools\jdk-15.0.2\bin`
+- `jdk` 폴더에서 `윈도우 cmd 열기`
+- `keytool -list -v -keystore C:\Users\callor\Documents\callor.jks`
+- `SHA1` 과 `SHA256` 을 `firestore.google.com` 프로젝트에 등록해 준다
